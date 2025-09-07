@@ -27,7 +27,7 @@ public class Registrar extends AppCompatActivity {
     EditText edtNombre, edtTipo, edtRaza, edtColor, edtPeso, edtGenero;
     Button btnGuardar;
 
-    private final String URL = "http://192.168.1.37:3001/mascotas";
+    private final String URL = "http://192.168.56.1:3001/mascotas";
     RequestQueue requestQueue;
 
     private void loadUI(){
