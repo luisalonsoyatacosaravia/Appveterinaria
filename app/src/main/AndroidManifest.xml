@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AppVeterinariaL"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Buscar"
+            android:exported="false" />
+        <activity
             android:name=".Registrar"
             android:exported="false" />
         <activity
