@@ -33,7 +33,7 @@ public class Buscar extends AppCompatActivity {
     private final String URL = "http://192.168.56.1:3001/mascotas/";
     RequestQueue requestQueue;
 
-    private void loadUI(){
+    private void loadUI() {
         edtIdBuscado = findViewById(R.id.edtIdBuscado);
         edtNombre = findViewById(R.id.edtNombreEdit);
         edtTipo = findViewById(R.id.edtTipoEdit);
@@ -47,15 +47,14 @@ public class Buscar extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_buscar);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            //Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            //v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         loadUI();
@@ -77,10 +76,10 @@ public class Buscar extends AppCompatActivity {
             public void onClick(View v) {
                 confirmDelete();
             }
-    });
-}//On Create
+        });
+    }//On Create
 
-    private void deleteMascota(){
+    private void deleteMascota() {
         requestQueue = Volley.newRequestQueue(this);
         String endPoint = URL + edtIdBuscado.getText().toString();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -102,8 +101,10 @@ public class Buscar extends AppCompatActivity {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+
     }
-    private void confirmDelete(){
+
+    private void confirmDelete() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Eliminacion de Mascota");
         dialog.setMessage("¿Procedemos con la Eliminacion?");
@@ -117,12 +118,13 @@ public class Buscar extends AppCompatActivity {
         });
         dialog.show();
     }
-    private void updateMascotas(){
+
+    private void updateMascotas() {
         //1. canal de Comunicacion
         requestQueue = Volley.newRequestQueue(this);
         //2. Json a Enviar (BODY)
         JSONObject jsonObject = new JSONObject();
-        try{
+        try {
             jsonObject.put("nombre", edtNombre.getText().toString().trim());
             jsonObject.put("tipo", edtTipo.getText().toString().trim());
             jsonObject.put("raza", edtRaza.getText().toString().trim());
@@ -131,7 +133,7 @@ public class Buscar extends AppCompatActivity {
             double pesoDouble = Double.parseDouble(pesoText);
             jsonObject.put("peso", pesoDouble);
             jsonObject.put("genero", edtGenero.getText().toString().trim());
-        }catch (JSONException e){
+        } catch (JSONException e) {
             Log.e("Error JSON", e.toString());
         }
 
@@ -157,7 +159,8 @@ public class Buscar extends AppCompatActivity {
         //4. Enviamos la solicitud
         requestQueue.add(jsonObjectRequest);
     }
-    private void confirmUpdate(){
+
+    private void confirmUpdate() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Actualizacion Mascotas");
         dialog.setMessage("¿Procedemos con la Actualizacion?");
@@ -171,13 +174,14 @@ public class Buscar extends AppCompatActivity {
         });
         dialog.show();
     }
-    private void searchById(){
-        String idmascota= edtIdBuscado.getText().toString().trim();
 
-        if (idmascota.isEmpty()){
+    private void searchById() {
+        String idmascota = edtIdBuscado.getText().toString().trim();
+
+        if (idmascota.isEmpty()) {
             edtIdBuscado.setError("Escriba el ID");
             edtIdBuscado.requestFocus();
-        }else{
+        } else {
             //1. Canal de comunicacion
             requestQueue = Volley.newRequestQueue(this);
             String enPoint = URL + idmascota;
@@ -190,7 +194,7 @@ public class Buscar extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
                             //Log.d("Respuesta WS:", jsonObject.toString());
-                            try{
+                            try {
                                 edtNombre.setText(jsonObject.getString("nombre"));
                                 edtTipo.setText(jsonObject.getString("tipo"));
                                 edtRaza.setText(jsonObject.getString("raza"));
@@ -199,7 +203,7 @@ public class Buscar extends AppCompatActivity {
                                 edtPeso.setText(String.valueOf(pesoDouble));
                                 edtGenero.setText(jsonObject.getString("genero"));
 
-                            }catch(JSONException e){
+                            } catch (JSONException e) {
                                 Log.e("Error JSON", e.toString());
                             }
                         }
@@ -218,7 +222,8 @@ public class Buscar extends AppCompatActivity {
             requestQueue.add(jsonObjectRequest);
         }
     }
-    private void formClear(){
+
+    private void formClear() {
         edtNombre.setText(null);
         edtTipo.setText(null);
         edtRaza.setText(null);
@@ -226,5 +231,6 @@ public class Buscar extends AppCompatActivity {
         edtPeso.setText(null);
         edtGenero.setText(null);
     }
-
 }
+
+

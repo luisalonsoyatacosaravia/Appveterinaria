@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Buscar">
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -93,5 +93,7 @@
         android:text="Eliminar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
 
 </LinearLayout>
