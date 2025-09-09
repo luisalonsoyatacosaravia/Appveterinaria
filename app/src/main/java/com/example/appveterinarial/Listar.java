@@ -28,7 +28,7 @@ public class Listar extends AppCompatActivity {
 
     ListView lstMascotas;
 
-    private final String URL = "http://192.168.56.1:3001/mascotas";
+    private final String URL = "http://192.168.1.37:3001/mascotas";
 
     RequestQueue requestQueue;
 
